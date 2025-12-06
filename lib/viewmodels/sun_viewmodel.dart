@@ -1,8 +1,8 @@
 import 'dart:async'; // Required for the Timer
 import 'package:flutter/foundation.dart';
 import '../models/weather_data.dart';
-import '../services/api_service.dart';
-import '../services/location_service.dart';
+import '../services/api_services.dart';
+import '../services/location_services.dart';
 
 class SunViewModel extends ChangeNotifier {
   // --- DEPENDENCIES ---
