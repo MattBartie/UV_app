@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewmodels/sun_viewmodel.dart';
-import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,6 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 50),
 
+<<<<<<< HEAD
               // 3. The Animated Timer Ring
               Center(
                 child: Stack(
