@@ -53,10 +53,22 @@ class SunViewModel extends ChangeNotifier {
       _calculateSafeTime(); // Update math immediately
 
     } catch (e) {
-      errorMessage = e.toString(); // Catch errors for UI
+      // FIX: Check for specific errors to give friendly messages
+      final rawError = e.toString().toLowerCase();
+      
+      if (rawError.contains('socketexception') || rawError.contains('clientexception')) {
+        errorMessage = "No internet connection. Please check your settings.";
+      } else if (rawError.contains('location')) {
+        errorMessage = "Please enable location services to get UV data.";
+      } else {
+        errorMessage = "Something went wrong. Pull to try again.";
+      }
+      // Debug print so YOU can still see the real error in the console
+      print("Debug Error: $e");
+      
     } finally {
       isLoading = false;
-      notifyListeners(); // Tells UI to re-render
+      notifyListeners(); 
     }
   }
 
