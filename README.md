@@ -78,8 +78,8 @@ To run this project locally, follow these steps:
 
 **2. Clone & Install**
 ```bash
-git clone [https://github.com/YOUR_USERNAME/SolarGuard.git](https://github.com/YOUR_USERNAME/SolarGuard.git)
-cd SolarGuard
+git clone https://github.com/MattBartie/UV_app.git
+cd UV_app
 flutter pub get
 ```
 
