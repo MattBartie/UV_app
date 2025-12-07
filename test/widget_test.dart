@@ -6,6 +6,7 @@ import 'package:uv_app/views/home_screen.dart';
 import 'package:uv_app/views/settings_screen.dart';
 import 'package:uv_app/views/widgets/sun_ring.dart';
 
+// --- Helpers to setup the Provider environment ---
 Widget createHomeScreen() {
   return MultiProvider(
     providers: [
@@ -29,6 +30,7 @@ void main() {
   testWidgets('Home Screen finds Start Protection button', (WidgetTester tester) async {
     await tester.pumpWidget(createHomeScreen());
     
+    // Search for text that actually exists in SolarGuard
     expect(find.text('START PROTECTION'), findsOneWidget);
     expect(find.text('SolarGuard'), findsOneWidget);
   });
@@ -56,18 +58,28 @@ void main() {
     expect(find.text('PAUSE TIMER'), findsOneWidget);
   });
 
-  // TEST 4: ISOLATED WIDGET TEST (SunRing)
+  // TEST 4: ISOLATED WIDGET TEST (SunRing) - UPDATED!
   testWidgets('SunRing displays correct minutes', (WidgetTester tester) async {
+    // 1. Create a dummy ViewModel with specific data
+    final mockVM = SunViewModel();
+    mockVM.maxSafeMinutes = 20;  
+    mockVM.secondsRemaining = 1200; 
+
+    // 2. Pump the SunRing wrapped in a Provider that holds our mock data
     await tester.pumpWidget(
-      const MaterialApp(
-        home: Scaffold(
-          // Pass dummy data: 50% progress, 1200 seconds (20 mins)
-          body: SunRing(progress: 0.5, secondsRemaining: 1200),
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<SunViewModel>.value(value: mockVM),
+        ],
+        child: const MaterialApp(
+          home: Scaffold(
+            body: SunRing(), 
+          ),
         ),
       ),
     );
 
-    // Verify it calculated "20m" correctly
+    // 3. Verify it calculated "20m" correctly
     expect(find.text('20m'), findsOneWidget);
     expect(find.text('SAFE TIME'), findsOneWidget);
   });
