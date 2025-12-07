@@ -110,7 +110,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const SizedBox(height: 50),
 
-<<<<<<< HEAD
               // 3. The Animated Timer Ring
               Center(
                 child: Stack(
