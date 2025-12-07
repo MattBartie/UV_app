@@ -43,6 +43,8 @@ dev_dependencies:
   geolocator: ^11.0.0
   shared_preferences: ^2.2.2
   flutter_native_splash: ^2.3.10
+  flutter_launcher_icons: ^0.13.1
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -89,6 +91,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+      android: true
+      ios: true
+      image_path: "icon.jpg" # Replace with the actual path to your icon
+      # Optional: specify different icons for Android and iOS
+      # image_path_android: "assets/icon/android_icon.png"
+      # image_path_ios: "assets/icon/ios_icon.png"
