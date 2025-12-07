@@ -27,8 +27,10 @@ class SettingsScreen extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Column(
+ 
+      body: ListView(
         children: [
+          // 1. The Header (Now part of the scrollable list)
           Container(
             padding: const EdgeInsets.all(16),
             color: Colors.orange.shade50,
@@ -38,16 +40,21 @@ class SettingsScreen extends StatelessWidget {
               style: TextStyle(fontSize: 14, color: Colors.black87),
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-              itemCount: skinTypes.length,
-              separatorBuilder: (_, __) => const Divider(),
-              itemBuilder: (context, index) {
-                final typeData = skinTypes[index];
-                final int typeNum = typeData['type'];
-                final bool isSelected = vm.userSkinType == typeNum;
+          
+          // 2. The List Items (Generated using a loop/map)
+          // We use the spread operator (...) to insert the list tiles here
+          ...skinTypes.map((typeData) {
+            
+            // Explicitly cast types to be safe
+            final int typeNum = typeData['type'] as int;
+            final String label = typeData['label'] as String;
+            final String desc = typeData['desc'] as String;
 
-                return ListTile(
+            final bool isSelected = vm.userSkinType == typeNum;
+
+            return Column(
+              children: [
+                ListTile(
                   leading: CircleAvatar(
                     backgroundColor: isSelected ? Colors.orange : Colors.grey.shade200,
                     child: Text(
@@ -58,22 +65,20 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  title: Text(typeData['label'], style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text(typeData['desc']),
+                  title: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text(desc),
                   trailing: isSelected 
                       ? const Icon(Icons.check_circle, color: Colors.orange) 
                       : null,
                   onTap: () {
-                    // Update the global state
                     vm.setSkinType(typeNum);
-                    
-                    // Go back to Home
                     Navigator.pop(context);
                   },
-                );
-              },
-            ),
-          ),
+                ),
+                const Divider(height: 1),
+              ],
+            );
+          }),
         ],
       ),
     );
