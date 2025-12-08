@@ -1,3 +1,5 @@
+By Enzo Grappone and Matthew Bartie
+
 # ☀️ SolarGuard
 
 **SolarGuard** is an intelligent solar safety companion designed to protect users from harmful UV radiation. By leveraging real-time GPS location and meteorological data, SolarGuard calculates the precise local UV Index and determines a personalized "Safe Burn Time" based on the user's specific Fitzpatrick skin type.
